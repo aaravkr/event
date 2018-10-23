@@ -1,7 +1,6 @@
 /* ===================================
     sticky nav
  ====================================== */
-
 $(window).scroll(function () {
     if ($(document).scrollTop() > 50) {
         $('nav').addClass('shrink');
@@ -1210,8 +1209,9 @@ function validateMyForm(e){
  
     
     var validator = validateEmail(email);
+    var dublicatecheck = dublicatecheckEmail(email);
     
-    if(validator == true){
+    if(validator == true && dublicatecheck == true){
     firebase.database().ref('participant').push({
         name:name,
         email: email,
@@ -1244,6 +1244,8 @@ function validateEmail(emailField){
             return false;
         }
       
+    
+    
         return true;
 
 }
@@ -1284,13 +1286,14 @@ function errData(err){
 
 
 //var ref = database.ref('participant');
-//ref.on('value',gotData,errData);
+//ref.on('value',gData,edata);
 //
-//function gotData(data){
+//function gData(data){
 //  
 //    var participants = data.val();
 //    var keys = Object.keys(participants);
 //    console.log(keys);
+//    console.log(keys.length);
 //    
 //     for (var i = 0; i < keys.length; i++){
 //         var k = keys[i];
@@ -1299,8 +1302,8 @@ function errData(err){
 //          var email = participants[k].email;
 //          var organization = participants[k].organization;
 //          var participant = participants[k].participantType;
-//         
-////         console.log(name,email,organization,participant);
+//     }
+//         console.log(name,email,organization,participant);
 //         
 //         
 //         
@@ -1322,10 +1325,32 @@ function errData(err){
 ==============================================================*/
  
 
+var database = firebase.database();
+    var ref = database.ref('participant');
+    ref.on('value', gData, edata);
 
+function gData(data){
+  
+    var participants = data.val();
+    var keys = Object.keys(participants);
+    addtotal(keys.length);
+    
+    function dublicatecheckEmail(email){
+    if(  )
+    
+    }
 
+    
+}
+function edata(err){
+    console.log(err);
+}
+    
 
-
+ function addtotal(totalCount) {
+    document.getElementById('totalcount').innerHTML= totalCount;
+    
+}
 
 
 

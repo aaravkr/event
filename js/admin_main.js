@@ -1,9 +1,5 @@
 {
   
-
-       
-
-
  var Auth_form_button = document.getElementById('auth_form');
  console.log('auth is', Auth_form_button);
 
@@ -66,7 +62,6 @@ var button_sign_out = document.getElementById('sign_out');
                 // An error happened.
             });
         }
-
     
     
     
