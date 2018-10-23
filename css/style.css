@@ -775,21 +775,22 @@ section { padding: 130px 0; }
 #header {z-index: 5}
 .navbar {border: none; display: inline-table; width: 100%; border-radius:0; position: fixed; top: 0; z-index: 10; border-bottom: 1px solid rgba(255,255,255,.15);background: #fff !important; }
 nav .container { display: table-cell; height: 140px; position: relative; vertical-align: middle; }
-.navbar-header {background: url("../images/logo-border.png") right no-repeat}
+
 nav.shrink .container {height: 120px;}
 .header-right { margin: 13px 0 0; }
 .navbar-nav a { font-size: 14px; text-transform: uppercase; color:#2283d4 !important; padding:0 !important; font-weight: 600}
-.navbar-nav a:hover { color: #cacaca !important; background: transparent !important}
-.navbar-nav a:focus {color: #fff !important; background: transparent !important}
+.navbar-nav a:hover { color: #000 !important;background-color: transparent !important; text-decoration: none; }
+
+.navbar-nav a:focus { background: transparent !important}
 .nav li {margin: 15px 20px}
 .sticky-wrapper {position: absolute; top: 0; width: 100%}
 .navbar-brand img {position: relative; top: -30px; z-index: 2; max-width: 300px;}
 nav.shrink {background: #fff; border: none !important;}
-.transparent-header.shrink {background: rgba(0,0,0,.7); border: none !important}
+.transparent-header.shrink { border: none !important}
 nav.navbar-height{  height: 100px !important;}
 nav.navbar-height.shrink {height: 50px !important;}
-.navbar li.active a { border-bottom: 1px solid #fff}
-.header-white li.active a { border-bottom: 1px solid #000}
+.navbar li.active a { border-bottom: 1px solid #2283d4}
+/*.header-white li.active a { border-bottom: 1px solid #2283d4}*/
 
 /* without button */
 .without-button .navbar-header { background: none}

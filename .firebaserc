@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "drdoevent"
+    "default": "drdoevent",
+    "stagingdrdo": "drdoevent",
+    "staging": "drdoevent"
   }
 }

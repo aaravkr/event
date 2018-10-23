@@ -1198,15 +1198,7 @@ $(function () {
     contact form self made
 ==============================================================*/
 
-//button
 
-   
-//
-//    var button = document.getElementById('eventticket-contact-butn');
-//
-//// event listener:
-//
-//button.addEventListener('click',submitform);
 
 function validateMyForm(e){
      
@@ -1251,7 +1243,7 @@ function validateEmail(emailField){
             setTimeout(vanish, 3000);
             return false;
         }
-
+      
         return true;
 
 }
@@ -1263,3 +1255,82 @@ document.getElementById('message').innerHTML=" ";
 function greetingvisible(){
     document.getElementById('form-submit').style.visibility = "visible";
 }
+
+/*==============================================================
+    database
+==============================================================*/
+
+
+
+var database = firebase.database();
+var ref = database.ref('participant');
+ref.on('child_added',gotData,errData);
+
+function gotData(data){
+   name = data.val().name;
+    email = data.val().email;
+    organization = data.val().organization;
+    participantType = data.val().participantType;
+    
+    
+    $("#tbody").append("<tr><td>" + name +" </td><td>" + email +" </td><td>" + organization +" </td><td>" + participantType +" </td> </tr>")
+}
+
+function errData(err){
+    console.log('error');
+    console.log(err);
+}
+
+
+
+//var ref = database.ref('participant');
+//ref.on('value',gotData,errData);
+//
+//function gotData(data){
+//  
+//    var participants = data.val();
+//    var keys = Object.keys(participants);
+//    console.log(keys);
+//    
+//     for (var i = 0; i < keys.length; i++){
+//         var k = keys[i];
+//         
+//         var name = participants[k].name;
+//          var email = participants[k].email;
+//          var organization = participants[k].organization;
+//          var participant = participants[k].participantType;
+//         
+////         console.log(name,email,organization,participant);
+//         
+//         
+//         
+//    var li = document.createElement("LI");
+//    var li_content = document.createTextNode(name);
+//    li.appendChild(li_content);
+//    document.getElementById("ParticipantList").appendChild(li);
+//     }
+//   
+//}
+//
+//function errData(err){
+//    console.log('error');
+//    console.log(err);
+//}
+
+/*==============================================================
+                            auth
+==============================================================*/
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
