@@ -1,6 +1,8 @@
 /* ===================================
     sticky nav
  ====================================== */
+
+let allUser = [];
 $(window).scroll(function () {
     if ($(document).scrollTop() > 50) {
         $('nav').addClass('shrink');
@@ -1197,7 +1199,8 @@ $(function () {
     contact form self made
 ==============================================================*/
 
-
+// document.getElementById("eventform").style.visibility = "hidden";
+// document.getElementById('form-submit').style.visibility = "visible";
 
 function validateMyForm(e){
      
@@ -1206,31 +1209,27 @@ function validateMyForm(e){
     var organization = document.getElementById('OrganizaitonType').value;
     var participant = document.getElementById('ParticipantType').value;
    
- 
-    
     var validator = validateEmail(email);
-    var dublicatecheck = dublicatecheckEmail(email);
-    
-    if(validator == true && dublicatecheck == true){
-    firebase.database().ref('participant').push({
+    var userExist = checkIfUserExists(allUser, email);
+    if(validator && !userExist ){
+    firebase.database().ref('extra').push({
         name:name,
         email: email,
         organization: organization,
         participantType: participant
     })
     .then(()=>{
-//       document.getElementById('name').value=" ";
-//        var email = document.getElementById('email').value= " ";
          
          document.getElementById("eventform").style.visibility = "hidden";
-         setTimeout(greetingvisible, 1000);
-         
-         
+         setTimeout(greetingvisible, 1000);  
     })
     .catch(()=>{
         console.log('error in sending');
     });
-};
+}else{
+     document.getElementById('message').innerHTML=" Email already exist";
+            setTimeout(vanish, 3000);
+}
 
 }
 
@@ -1243,11 +1242,7 @@ function validateEmail(emailField){
             setTimeout(vanish, 3000);
             return false;
         }
-      
-    
-    
         return true;
-
 }
 
 function vanish(){
@@ -1298,7 +1293,7 @@ function errData(err){
 //     for (var i = 0; i < keys.length; i++){
 //         var k = keys[i];
 //         
-//         var name = participants[k].name;
+//          var name = participants[k].name;
 //          var email = participants[k].email;
 //          var organization = participants[k].organization;
 //          var participant = participants[k].participantType;
@@ -1323,24 +1318,27 @@ function errData(err){
 /*==============================================================
                             auth
 ==============================================================*/
- 
+ function checkIfUserExists(arr, name) {
+     var keys = Object.keys(arr);
+    for(var i=0; i< keys.length; i++){
+        var k = arr[keys[i]].email;
+        if (name === k ) {
+            return true;
+        }
+    }
+    return false;
+ }
 
 var database = firebase.database();
     var ref = database.ref('participant');
     ref.on('value', gData, edata);
 
-function gData(data){
-  
-    var participants = data.val();
-    var keys = Object.keys(participants);
-    addtotal(keys.length);
-    
-    function dublicatecheckEmail(email){
-    if(  )
-    
-    }
+ 
 
-    
+function gData(data){
+     allUser = data.val();
+     var keys = Object.keys(allUser);
+     addtotal(keys.length);
 }
 function edata(err){
     console.log(err);

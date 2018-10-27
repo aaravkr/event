@@ -2,6 +2,7 @@
   "projects": {
     "default": "drdoevent",
     "stagingdrdo": "drdoevent",
-    "staging": "drdoevent"
+    "staging": "drdoevent",
+    "final": "drdoevent"
   }
 }

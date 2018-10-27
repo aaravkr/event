@@ -41,7 +41,7 @@
                 button_sign_out.style.display = 'block';
                 var email = user.email;
                 
-                window.location.href = "/abcdefgparticipantlist.html";
+                window.location.href = "/lkjhgfdsaqwertyuiop.html";
                 
             } else {
                 console.log('no user')

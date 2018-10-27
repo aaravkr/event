@@ -68,7 +68,21 @@
     <script src="/__/firebase/5.5.4/firebase-database.js"></script>
     <script src="/__/firebase/5.5.4/firebase-functions.js"></script>
     <script src="/__/firebase/init.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
    
+<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD9W78gFb1Tjrf3w77K7iGNhNnseHU6jFI",
+    authDomain: "drdoevent.firebaseapp.com",
+    databaseURL: "https://drdoevent.firebaseio.com",
+    projectId: "drdoevent",
+    storageBucket: "drdoevent.appspot.com",
+    messagingSenderId: "248879811845"
+  };
+  firebase.initializeApp(config);
+</script>
    
     <style>
         .white {
@@ -125,6 +139,10 @@
          .res-mar{
                 text-align: justify;
         }
+        
+        .mg-tp{
+            margin-top: 20px;
+        }
 
         @media (max-width: 767px) {
             .margin-top {
@@ -139,6 +157,24 @@
         
         
     </style>
+    
+    <script type="text/javascript">
+        function dataCallback(response) {
+            console.log("dataCallback", response)
+           fetch(`/checkRecaptcha?response=${encodeURIComponent(response)}`).
+            then(response => {
+                if (response.ok) {
+                    document.querySelector('#eventticket-contact-butn').disabled = false;
+                } else {
+                    document.querySelector('#eventticket-contact-butn').disabled = true;
+                }
+            })
+            .catch( e => console.log(e));
+        }
+        function dataExpiredCallback() {
+            console.log("dataExpiredCallback")
+        }
+    </script>
 </head>
 
 <body>
@@ -622,7 +658,6 @@
 
                                <form id="eventform" onsubmit="event.preventDefault(); validateMyForm();">
                     
-                              
                                 <!-- input -->
                                  <div >
                                 <input  type="text"   name="name" id="name" placeholder="* Your Name" class="medium-input" required>
@@ -656,18 +691,20 @@
                                     </select>
                                 </div>
 
-                                <!--
-                                <div class="Thank-you">
-                                <h4> Thank You</h4>
-                                  </div>
--->
 
-                                <!-- button  -->
-                                <button id="eventticket-contact-butn" type="submit" class="highlight-button-white-border btn btn-medium">Submit</button>
+                               <div class="g-recaptcha"
+                                data-sitekey="6LcXdHYUAAAAAHx2Dv9LHpV2qqmuvTipZn9ctbGM"
+                                data-callback="dataCallback"
+                                data-expired-callback="dataExpiredCallback"></div>
+
+
+                                <!-- button -->
+                        <button id="eventticket-contact-butn" type="submit" class="highlight-button-white-border btn btn-medium mg-tp" disabled> Submit</button>
+ 
                                 <!-- end button  -->
                             </form>
                         </div>
-                        <div class="success-form alt-font deep-green-text text-uppercase text-center title-large font-weight-600 xs-title-extra-large" id="form-submit"> Thank you for your registration!</div>
+                        <div class="success-form alt-font deep-green-text text-uppercase text-center title-large font-weight-600 xs-title-extra-large" id="form-submit">Thank you for registering, you have been waitlisted</div>
                     </div>
                 </div>
             </div>
